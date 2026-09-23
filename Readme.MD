@@ -30,6 +30,14 @@ Largely inspired by the *Zweitstimme* Election Model by Stoetzer et al. (2019, 2
 
 ---
 
+Gelman, Andrew, and Gary King. “Why Are American Presidential Election Campaign Polls So Variable When Votes Are So Predictable?” British Journal of Political Science 23, no. 4 (1993): 409–51. https://doi.org/10.1017/S0007123400006682.
+
+Stoetzer, Lukas F., Marcel Neunhoeffer, Thomas Gschwend, Simon Munzert, and Sebastian Sternberg. “Forecasting Elections in Multiparty Systems: A Bayesian Approach Combining Polls and Fundamentals.” Political Analysis 27, no. 2 (2019): 255–62. https://doi.org/10.1017/pan.2018.49.
+
+Lukas F. Stoetzer, Cornelius Erfort, Hannah Rajski, Thomas Gschwend, Simon Munzert, Elias Koch. “An election forecasting model for subnational elections.“ Electoral Studies, Volume 95, (2025), https://doi.org/10.1016/j.electstud.2025.102939.
+
+---
+
 Štěpán Jabůrek
 
 Institute of Political Studies, Charles University  
