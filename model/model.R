@@ -143,8 +143,8 @@ party_map <- c(
   "Praha_Sobe" = "praha_sobe", "SPD" = "spd", "Motoriste" = "motoriste", "Spojena_Levice" = "spojena_levice"
 )
 
-N_prior         <- 500
-N_poll          <- 1500
+N_prior         <- 700
+N_poll          <- 1300
 poll_others_pct <- max(0, 100 - sum(poll_summary$poll_pct))
 poll_shares_8   <- poll_summary$poll_pct[match(party_map[parties_2026[1:8]], poll_summary$party)] / 100
 poll_shares     <- c(poll_shares_8, poll_others_pct / 100)
