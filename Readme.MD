@@ -26,7 +26,7 @@ Largely inspired by the *Zweitstimme* Election Model by Stoetzer et al. (2019, 2
 
 - **National Polls:** Aggregated from [mandaty.cz](https://mandaty.cz/).
 - **Local Polls:** Manual extraction from published polling releases and media reports.
-- **Historical Fundamentals:** Manually compiled dataset of historical municipal, parliamentary, and EP election results.
+- **Historical Fundamentals:** Manually compiled dataset of past municipal and parliamentary election results.
 
 ---
 
