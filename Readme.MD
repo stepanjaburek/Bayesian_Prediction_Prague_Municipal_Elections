@@ -1,24 +1,34 @@
 # Prague 2026 Municipal Election: Bayesian Prediction Model
 
-Largely inspired by the Zweitstimme Election Model by Stoetzer et al. (2019, 2025) and the Gelman and King (1993) approach to predicting elections.
-But with big  changes (GPs, Ordered Beta Regression, even less local polling data in Prague)
+Largely inspired by the *Zweitstimme* Election Model by Stoetzer et al. (2019, 2025) and the Gelman and King (1993) approach to predicting elections, adapted with Gaussian Processes, Ordered Beta Regression, and modeling strategies tailored to sparse local polling data in Prague.
 
-## Core Components:
-1. Fundamentals Model (Ordered Beta Regression) for Prague based on historical election data and national trends
+---
 
- 1a. Latent national polling (Gaussian Processes)
+## Core Components
 
- 1b. Prague-specific elasticity of national support (based on Prague vs. National party performance in Parliamentary elections)
+- **1. Fundamentals Model (Ordered Beta Regression)**  
+  Predicts municipal vote shares in Prague based on historical election results and broader political dynamics.
+  - **1a. Latent National Polling:** Gaussian Process (GP) regression modeling continuous national party support trends over time.
+  - **1b. Prague-Specific Elasticity of National Support:** Elasticity coefficients derived from relative party performance in Prague vs. nationwide results in Parliamentary elections.
+  - **1c. Prague Historical Fundamentals:** Predictors capturing long-term baseline divergence (Prague vs. national vote), mayoral incumbency advantages, governing coalition membership, and new party entry dynamics.
 
- 1c. Historical fundamentals of Prague  (Prague vs. National vote share, Mayor incumbency, coalition membership, new party status)
+- **2. Local Polling Update (Exact Conjugate Dirichlet)**  
+  Bayesian updating using an exact Dirichlet-Multinomial conjugate framework to combine the fundamentals-based prior with available Prague municipal polling (e.g., Ipsos, Median, SC&C).
 
-2. Local Polling Update (Exact Conjugate Dirichlet) for Prague based on the latest polling data (Ipsos, Median, SC&C)
-3. Seat allocation simulation (d'Hondt, 5% threshold)
+- **3. Seat Allocation Simulation**  
+  Full probabilistic simulation of seat counts across the Prague City Assembly:
+  - Enforces the statutory 5% threshold for entering the assembly.
+  - Allocates seats via the standard d'Hondt method across posterior draws.
+
+---
 
 ## Data Origins
-1. National Polls from https://mandaty.cz/ aggregator
-2. Local Polls from manual scrape of news reports (no nice outputs)
-3. Historical Fundamentals manual creation from past elections
 
- Štěpán Jabůrek
- Institute of Political Studies, Charles University
+- **National Polls:** Aggregated from [mandaty.cz](https://mandaty.cz/).
+- **Local Polls:** Systematic manual extraction and harmonization from published polling releases and media reports.
+- **Historical Fundamentals:** Manually compiled and standardized dataset of historical municipal, regional, and parliamentary election results.
+
+---
+
+**Author:** Štěpán Jabůrek  
+**Affiliation:** Institute of Political Studies, Faculty of Social Sciences, Charles University  
