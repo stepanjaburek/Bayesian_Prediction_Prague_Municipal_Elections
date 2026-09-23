@@ -1,6 +1,6 @@
 # Prague 2026 Municipal Election: Bayesian Prediction Model
 
-Largely inspired by the *Zweitstimme* Election Model by Stoetzer et al. (2019, 2025) and the Gelman and King (1993) approach to predicting elections. But adapted with Gaussian Processes, Ordered Beta Regression, and modeling strategies for even less polling data in Prague.
+Largely inspired by the *Zweitstimme* Election Modeling approach by Stoetzer et al. (2019, 2025) and the Gelman and King (1993) approach to predicting elections. But adapted with Gaussian Processes, Ordered Beta Regression, and modeling strategies for even less polling data in Prague.
 
 ---
 
