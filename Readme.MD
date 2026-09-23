@@ -11,7 +11,7 @@ Largely inspired by the *Zweitstimme* Election Model by Stoetzer et al. (2019, 2
   - **1a. Latent National Polling:** Gaussian Process (GP) regression modeling national party support trends
   - **1b. Prague-Specific Elasticity of National Support:** Elasticity coefficients derived from party performance in Prague vs. nationwide results in Parliamentary elections.
   - **1c. Prague Historical Fundamentals:** Prague vs. National vote share, Mayor incumbency, coalition membership, new party status
-  - **1d. Fit model on data until 2022. Then posterior predict 2026.
+  - **1d.** Fit model on data until 2022. Then posterior predict 2026.
 
 
 - **2. Local Prague Polling Update (Dirichlet–Multinomial conjugate update)**  
