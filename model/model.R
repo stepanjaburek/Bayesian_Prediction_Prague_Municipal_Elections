@@ -281,7 +281,7 @@ p_vote <- ggplot(df_plot, aes(x = vote_mean, y = party, color = party)) +
   geom_vline(xintercept = 5, linetype = "dashed", color = "red") +
   geom_linerange(aes(xmin = vote_low, xmax = vote_high), linewidth = 2) +
   geom_point(size = 3.5, color = "black", fill = "white", shape = 21, stroke = 1.5) +
-  geom_text(aes(label = sprintf("%.1f%%", vote_mean)), vjust = -1, size = 3.2, fontface = "bold") +
+  geom_text(aes(label = sprintf("%.1f%%", vote_mean)), vjust = -1, size = 3.2, color = "#1a1a1a", fontface = "bold") +
   scale_color_manual(values = colors, guide = "none") +
   scale_x_continuous(limits = c(0, 26)) +
   labs(title = "Vote Share (%)", subtitle = "Point estimate & 89% CI (5% threshold in red)", x = NULL, y = NULL) +
@@ -290,7 +290,7 @@ p_vote <- ggplot(df_plot, aes(x = vote_mean, y = party, color = party)) +
 p_seats <- ggplot(df_plot, aes(x = seats_mean, y = party, color = party)) +
   geom_linerange(aes(xmin = seats_low, xmax = seats_high), linewidth = 2) +
   geom_point(size = 3.5, color = "black", fill = "white", shape = 21, stroke = 1.5) +
-  geom_text(aes(label = sprintf("%.0f", seats_mean)), vjust = -1, size = 3.2, fontface = "bold") +
+  geom_text(aes(label = sprintf("%.0f", seats_mean)), vjust = -1, size = 3.2, color = "#1a1a1a", fontface = "bold") +
   scale_color_manual(values = colors, guide = "none") +
   scale_x_continuous(limits = c(0, 22)) +
   labs(title = "Projected Seats (of 65)", subtitle = "d'Hondt allocation", x = NULL, y = NULL) +
@@ -301,7 +301,10 @@ p_parties <- (p_vote | p_seats) +
   plot_annotation(
     title    = "Prague 2026 Municipal Election: Bayesian Prediction Model",
     subtitle = "Built on the Zweitstimme Bayesian Election Model: Political fundamentals + National Polls + Prague Election Polls (Ipsos, Median, SC&C)",
-    caption  = "Štěpán Jabůrek | Institute of Political Studies, Charles University"
+    caption  = "Štěpán Jabůrek | Institute of Political Studies, Charles University",
+    theme    = theme(
+      plot.title = element_text(face = "bold", size = 13)
+    )
   )
 p_parties
 ggsave("prague_parties.png", p_parties, width = 10, height = 5.5, bg = "white")
@@ -319,10 +322,8 @@ df_coal_plot <- tibble(
     "National Gov Coalition (ANO + SPD + Motoristé)"
   ),
   seats_mean   = c(mean(c_incumbent), mean(c_right), mean(c_broad), mean(c_spolu_stan), mean(c_nat_gov)),
-  seats_low80  = c(quantile(c_incumbent, 0.10), quantile(c_right, 0.10), quantile(c_broad, 0.10), quantile(c_spolu_stan, 0.10), quantile(c_nat_gov, 0.10)),
-  seats_high80 = c(quantile(c_incumbent, 0.90), quantile(c_right, 0.90), quantile(c_broad, 0.90), quantile(c_spolu_stan, 0.90), quantile(c_nat_gov, 0.90)),
-  seats_low50  = c(quantile(c_incumbent, 0.25), quantile(c_right, 0.25), quantile(c_broad, 0.25), quantile(c_spolu_stan, 0.25), quantile(c_nat_gov, 0.25)),
-  seats_high50 = c(quantile(c_incumbent, 0.75), quantile(c_right, 0.75), quantile(c_broad, 0.75), quantile(c_spolu_stan, 0.75), quantile(c_nat_gov, 0.75)),
+  seats_low89  = c(quantile(c_incumbent, 0.055), quantile(c_right, 0.055), quantile(c_broad, 0.055), quantile(c_spolu_stan, 0.055), quantile(c_nat_gov, 0.055)),
+  seats_high89 = c(quantile(c_incumbent, 0.945), quantile(c_right, 0.945), quantile(c_broad, 0.945), quantile(c_spolu_stan, 0.945), quantile(c_nat_gov, 0.945)),
   prob_maj     = c(mean(c_incumbent >= 33), mean(c_right >= 33), mean(c_broad >= 33), mean(c_spolu_stan >= 33), mean(c_nat_gov >= 33)) * 100
 ) %>%
   mutate(
@@ -339,10 +340,8 @@ p_coalitions <- ggplot(df_coal_plot, aes(y = coalition_label, x = seats_mean)) +
     label = "33 Seats Needed for Majority",
     color = "#1b5e20", fill = "#f1f8e9", fontface = "bold", size = 3, linewidth = 0.2
   ) +
-  geom_linerange(aes(xmin = seats_low80, xmax = seats_high80, color = has_majority), 
-                 linewidth = 1.1, alpha = 0.5) +
-  geom_linerange(aes(xmin = seats_low50, xmax = seats_high50, color = has_majority), 
-                 linewidth = 2.8) +
+  geom_linerange(aes(xmin = seats_low89, xmax = seats_high89, color = has_majority), 
+                 linewidth = 2, alpha = 0.8) +
   geom_point(size = 3.6, color = "black", fill = "white", shape = 21, stroke = 1.4) +
   geom_text(
     aes(label = sprintf("%.0f", seats_mean)),
@@ -352,25 +351,23 @@ p_coalitions <- ggplot(df_coal_plot, aes(y = coalition_label, x = seats_mean)) +
   scale_x_continuous(limits = c(18, 52), breaks = seq(20, 50, by = 5)) +
   coord_cartesian(clip = "off") +
   labs(
-    title    = "Prague 2026: Bayesian Coalition Prediction",
-    subtitle = "Posterior seat distributions (point = mean, thick bar = 50% CI, thin bar = 80% CI)",
+    title    = "Prague Election 2026: Bayesian Coalition Prediction",
+    subtitle = "Posterior seat distributions (point = mean, bar = 89% CI)",
     x        = "Combined Projected Seats (out of 65)",
     y        = NULL,
     caption  = "Štěpán Jabůrek | Institute of Political Studies, Charles University"
   ) +
-  theme_minimal(base_size = 11) +
+theme_minimal(base_size = 11) +
   theme(
-    plot.title         = element_text(face = "bold", size = 13, margin = margin(b = 4)),
+    plot.title         = element_text(face = "bold", size = 13),
     plot.subtitle      = element_text(color = "#555555", size = 9.5, margin = margin(b = 14)),
     plot.caption       = element_text(color = "#888888", size = 8, margin = margin(t = 12)),
     axis.text.y        = element_text(size = 9, color = "#222222", lineheight = 1.15),
     axis.text.x        = element_text(size = 8.5, color = "#555555"),
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor   = element_blank(),
-    panel.grid.major.x = element_line(color = "#eaeaea", linetype = "dotted"),
     plot.margin        = margin(18, 18, 12, 12)
   )
 
 print(p_coalitions)
 
 ggsave("prague_coalitions.png", p_coalitions, width = 8.5, height = 4.8, bg = "white")
+
