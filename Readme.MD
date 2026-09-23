@@ -5,9 +5,13 @@ But with big  changes (GPs, Ordered Beta Regression, even less local polling dat
 
 ## Core Components:
 1. Fundamentals Model (Ordered Beta Regression) for Prague based on historical election data and national trends
+
  1a. Latent national polling (Gaussian Processes)
- 1b. Prague-specific elasticity of national support (based on Prague vs. National party performance in Parliamentary elections)
- 1c. Historical fundamentals of Prague  (Prague vs. National vote share, Mayor incumbency, coalition membership, new party status)
+
+1b. Prague-specific elasticity of national support (based on Prague vs. National party performance in Parliamentary elections)
+
+1c. Historical fundamentals of Prague  (Prague vs. National vote share, Mayor incumbency, coalition membership, new party status)
+
 2. Local Polling Update (Exact Conjugate Dirichlet) for Prague based on the latest polling data (Ipsos, Median, SC&C)
 3. Seat allocation simulation (d'Hondt, 5% threshold)
 
